@@ -30,7 +30,7 @@
   - Id
   - Date
   - UserId
-  - CargoTrackingkNumber
+  - CargoTrackingNumber
     
 - OrderDetail
   - Id

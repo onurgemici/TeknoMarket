@@ -6,4 +6,37 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\assets\img\close-icon.svg" />
+    <None Include="wwwroot\assets\img\logos\facebook.svg" />
+    <None Include="wwwroot\assets\img\logos\google.svg" />
+    <None Include="wwwroot\assets\img\logos\ibm.svg" />
+    <None Include="wwwroot\assets\img\logos\microsoft.svg" />
+    <None Include="wwwroot\assets\img\navbar-logo.svg" />
+    <None Include="wwwroot\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\js\jquery-1.11.0.min.js" />
+    <None Include="wwwroot\js\modernizr.js" />
+    <None Include="wwwroot\js\plugins.js" />
+    <None Include="wwwroot\js\script.js" />
+    <None Include="wwwroot\js\scripts.js" />
+    <None Include="wwwroot\js\site.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\TeknoMarketData\TeknoMarketData.csproj" />
+    <ProjectReference Include="..\MigrationsSqlServer\MigrationsSqlServer.csproj" />
+  </ItemGroup>
+
 </Project>

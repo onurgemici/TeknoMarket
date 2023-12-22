@@ -1,0 +1,27 @@
+{
+  "name": "login-form-f",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^8.0.3",
+    "@angular/core": "^8.0.3",
+    "guid-typescript": "^1.0.9",
+    "ngx-captcha": "^8.0.1",
+    "bootstrap": "^4.5.0"
+  },
+  "dependencies": {
+    "guid-typescript": "^1.0.9",
+    "ngx-captcha": "^8.0.1",
+    "bootstrap": "^4.5.0",
+    "tslib": "^1.9.0"
+  },
+  "main": "bundles/login-form-f.umd.js",
+  "module": "fesm5/login-form-f.js",
+  "es2015": "fesm2015/login-form-f.js",
+  "esm5": "esm5/login-form-f.js",
+  "esm2015": "esm2015/login-form-f.js",
+  "fesm5": "fesm5/login-form-f.js",
+  "fesm2015": "fesm2015/login-form-f.js",
+  "typings": "login-form-f.d.ts",
+  "metadata": "login-form-f.metadata.json",
+  "sideEffects": false
+}

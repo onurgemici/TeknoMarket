@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "login-form-f@0.0.1",
+      "destination": "Styles/login-form-f/"
+    },
+    {
+      "library": "aviato@0.0.1",
+      "destination": "Styles/aviato-bootstrap-main/aviato/"
+    }
+  ]
+}

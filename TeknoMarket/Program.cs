@@ -1,11 +1,15 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NETCore.MailKit.Extensions;
+using NETCore.MailKit.Infrastructure.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using TeknoMarket;
 using TeknoMarketData;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +36,44 @@ builder
                 config.UseSqlServer(cs, p => p.MigrationsAssembly("MigrationsSqlServer"));
                 break;
         }
+    });
+
+builder.Services.AddIdentity<User, Role>(config =>
+{
+    config.SignIn.RequireConfirmedEmail = true;
+    config.User.RequireUniqueEmail = true;
+    config.Password.RequireDigit = builder.Configuration.GetValue<bool>("Security:Password:RequireDigit");
+    config.Password.RequiredLength = builder.Configuration.GetValue<int>("Security:Password:RequiredLength");
+    config.Password.RequiredUniqueChars = builder.Configuration.GetValue<int>("Security:Password:RequiredUniqueChars");
+    config.Password.RequireLowercase = builder.Configuration.GetValue<bool>("Security:Password:RequireLowercase");
+    config.Password.RequireUppercase = builder.Configuration.GetValue<bool>("Security:Password:RequireUppercase");
+    config.Password.RequireNonAlphanumeric = builder.Configuration.GetValue<bool>("Security:Password:RequireNonAlphanumeric");
+
+    config.Lockout.MaxFailedAccessAttempts = builder.Configuration.GetValue<int>("Security:Lockout:MaxFailedAccessAttempts");
+    config.Lockout.DefaultLockoutTimeSpan = builder.Configuration.GetValue<TimeSpan>("Security:Lockout:DefaultLockoutTimeSpan");
+})
+       .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders()
+   .AddErrorDescriber<AppIdentityErrorDescriber>();
+
+builder
+    .Services
+    .AddMailKit(optionBuilder =>
+    {
+        optionBuilder.UseMailKit(new MailKitOptions()
+        {
+            //get options from sercets.json
+            Server = builder.Configuration["EMail:Server"],
+            Port = builder.Configuration.GetValue<int>("EMail:Port"),
+            SenderName = builder.Configuration["EMail:SenderName"],
+            SenderEmail = builder.Configuration["EMail:SenderEmail"],
+
+            // can be optional with no authentication 
+            Account = builder.Configuration["EMail:Account"],
+            Password = builder.Configuration["EMail:Password"],
+            // enable ssl or tls
+            Security = builder.Configuration.GetValue<bool>("EMail:SSL")
+        });
     });
 
 var app = builder.Build();

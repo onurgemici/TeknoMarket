@@ -7,19 +7,152 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\assets\img\close-icon.svg" />
-    <None Include="wwwroot\assets\img\logos\facebook.svg" />
-    <None Include="wwwroot\assets\img\logos\google.svg" />
-    <None Include="wwwroot\assets\img\logos\ibm.svg" />
-    <None Include="wwwroot\assets\img\logos\microsoft.svg" />
-    <None Include="wwwroot\assets\img\navbar-logo.svg" />
-    <None Include="wwwroot\js\bootstrap.bundle.min.js" />
-    <None Include="wwwroot\js\jquery-1.11.0.min.js" />
-    <None Include="wwwroot\js\modernizr.js" />
-    <None Include="wwwroot\js\plugins.js" />
-    <None Include="wwwroot\js\script.js" />
-    <None Include="wwwroot\js\scripts.js" />
-    <None Include="wwwroot\js\site.js" />
+    <Content Remove="wwwroot\css\bootstrap.min.css" />
+    <Content Remove="wwwroot\css\bootstrap.min.css.map" />
+    <Content Remove="wwwroot\css\owl.carousel.min.css" />
+    <Content Remove="wwwroot\css\style.css" />
+    <Content Remove="wwwroot\lib\animate\animate.css" />
+    <Content Remove="wwwroot\lib\bootstrap\bootstrap-reboot.css" />
+    <Content Remove="wwwroot\lib\bootstrap\bootstrap.css" />
+    <Content Remove="wwwroot\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Remove="wwwroot\lib\css\home.css" />
+    <Content Remove="wwwroot\lib\css\home.css.map" />
+    <Content Remove="wwwroot\lib\css\style.css" />
+    <Content Remove="wwwroot\lib\css\style.css.map" />
+    <Content Remove="wwwroot\lib\fonts\icomoon\demo-files\demo.css" />
+    <Content Remove="wwwroot\lib\fonts\icomoon\demo-files\demo.js" />
+    <Content Remove="wwwroot\lib\fonts\icomoon\demo.html" />
+    <Content Remove="wwwroot\lib\fonts\icomoon\fonts\icomoon.eot" />
+    <Content Remove="wwwroot\lib\fonts\icomoon\fonts\icomoon.svg" />
+    <Content Remove="wwwroot\lib\fonts\icomoon\fonts\icomoon.ttf" />
+    <Content Remove="wwwroot\lib\fonts\icomoon\fonts\icomoon.woff" />
+    <Content Remove="wwwroot\lib\fonts\icomoon\Read Me.txt" />
+    <Content Remove="wwwroot\lib\fonts\icomoon\style.css" />
+    <Content Remove="wwwroot\lib\fonts\themefisher-font\demo-files\demo.css" />
+    <Content Remove="wwwroot\lib\fonts\themefisher-font\demo-files\demo.js" />
+    <Content Remove="wwwroot\lib\fonts\themefisher-font\demo.html" />
+    <Content Remove="wwwroot\lib\fonts\themefisher-font\fonts\themefisher-font.eot" />
+    <Content Remove="wwwroot\lib\fonts\themefisher-font\fonts\themefisher-font.svg" />
+    <Content Remove="wwwroot\lib\fonts\themefisher-font\fonts\themefisher-font.ttf" />
+    <Content Remove="wwwroot\lib\fonts\themefisher-font\fonts\themefisher-font.woff" />
+    <Content Remove="wwwroot\lib\fonts\themefisher-font\Read Me.txt" />
+    <Content Remove="wwwroot\lib\fonts\themefisher-font\style.css" />
+    <Content Remove="wwwroot\lib\images\bg_1.jpg" />
+    <Content Remove="wwwroot\lib\js\bootstrap.min.js" />
+    <Content Remove="wwwroot\lib\js\jquery-3.3.1.min.js" />
+    <Content Remove="wwwroot\lib\js\js\script.js" />
+    <Content Remove="wwwroot\lib\js\main.js" />
+    <Content Remove="wwwroot\lib\js\owl.carousel.min.js" />
+    <Content Remove="wwwroot\lib\js\popper.min.js" />
+    <Content Remove="wwwroot\lib\slick\ajax-loader.gif" />
+    <Content Remove="wwwroot\lib\slick\fonts\slick.eot" />
+    <Content Remove="wwwroot\lib\slick\fonts\slick.svg" />
+    <Content Remove="wwwroot\lib\slick\fonts\slick.ttf" />
+    <Content Remove="wwwroot\lib\slick\fonts\slick.woff" />
+    <Content Remove="wwwroot\lib\slick\README.markdown" />
+    <Content Remove="wwwroot\lib\slick\slick-animation.min.js" />
+    <Content Remove="wwwroot\lib\slick\slick-theme.css" />
+    <Content Remove="wwwroot\lib\slick\slick.css" />
+    <Content Remove="wwwroot\lib\slick\slick.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Styles\login-form-05\.DS_Store" />
+    <None Include="Styles\login-form-05\css\.DS_Store" />
+    <None Include="Styles\login-form-05\fonts\.DS_Store" />
+    <None Include="Styles\login-form-05\images\.DS_Store" />
+    <None Include="Styles\login-form-05\scss\.DS_Store" />
+    <None Include="wwwroot\css\bootstrap.min.css" />
+    <None Include="wwwroot\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\css\owl.carousel.min.css" />
+    <None Include="wwwroot\css\style.css" />
+    <None Include="wwwroot\fonts\.DS_Store" />
+    <None Include="wwwroot\fonts\icomoon\demo-files\demo.js" />
+    <None Include="wwwroot\fonts\icomoon\fonts\icomoon.svg" />
+    <None Include="wwwroot\lib\animate\animate.css" />
+    <None Include="wwwroot\lib\bootstrap\bootstrap-reboot.css" />
+    <None Include="wwwroot\lib\bootstrap\bootstrap.css" />
+    <None Include="wwwroot\lib\bootstrap\css\bootstrap.min.css" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\css\home.css" />
+    <None Include="wwwroot\lib\css\home.css.map" />
+    <None Include="wwwroot\lib\css\style.css" />
+    <None Include="wwwroot\lib\css\style.css.map" />
+    <None Include="wwwroot\lib\fonts\.DS_Store" />
+    <None Include="wwwroot\lib\fonts\icomoon\demo-files\demo.css" />
+    <None Include="wwwroot\lib\fonts\icomoon\demo-files\demo.js" />
+    <None Include="wwwroot\lib\fonts\icomoon\demo.html" />
+    <None Include="wwwroot\lib\fonts\icomoon\fonts\icomoon.eot" />
+    <None Include="wwwroot\lib\fonts\icomoon\fonts\icomoon.svg" />
+    <None Include="wwwroot\lib\fonts\icomoon\fonts\icomoon.ttf" />
+    <None Include="wwwroot\lib\fonts\icomoon\fonts\icomoon.woff" />
+    <None Include="wwwroot\lib\fonts\icomoon\Read Me.txt" />
+    <None Include="wwwroot\lib\fonts\icomoon\style.css" />
+    <None Include="wwwroot\lib\fonts\themefisher-font\demo-files\demo.css" />
+    <None Include="wwwroot\lib\fonts\themefisher-font\demo-files\demo.js" />
+    <None Include="wwwroot\lib\fonts\themefisher-font\demo.html" />
+    <None Include="wwwroot\lib\fonts\themefisher-font\fonts\themefisher-font.eot" />
+    <None Include="wwwroot\lib\fonts\themefisher-font\fonts\themefisher-font.svg" />
+    <None Include="wwwroot\lib\fonts\themefisher-font\fonts\themefisher-font.ttf" />
+    <None Include="wwwroot\lib\fonts\themefisher-font\fonts\themefisher-font.woff" />
+    <None Include="wwwroot\lib\fonts\themefisher-font\Read Me.txt" />
+    <None Include="wwwroot\lib\fonts\themefisher-font\style.css" />
+    <None Include="wwwroot\lib\images\.DS_Store" />
+    <None Include="wwwroot\lib\images\bg_1.jpg" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <None Include="wwwroot\lib\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\js\jquery-3.3.1.min.js" />
+    <None Include="wwwroot\lib\js\js\script.js" />
+    <None Include="wwwroot\lib\js\main.js" />
+    <None Include="wwwroot\lib\js\owl.carousel.min.js" />
+    <None Include="wwwroot\lib\js\popper.min.js" />
+    <None Include="wwwroot\lib\slick\ajax-loader.gif" />
+    <None Include="wwwroot\lib\slick\fonts\slick.eot" />
+    <None Include="wwwroot\lib\slick\fonts\slick.svg" />
+    <None Include="wwwroot\lib\slick\fonts\slick.ttf" />
+    <None Include="wwwroot\lib\slick\fonts\slick.woff" />
+    <None Include="wwwroot\lib\slick\README.markdown" />
+    <None Include="wwwroot\lib\slick\slick-animation.min.js" />
+    <None Include="wwwroot\lib\slick\slick-theme.css" />
+    <None Include="wwwroot\lib\slick\slick.css" />
+    <None Include="wwwroot\lib\slick\slick.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +163,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="NETCore.MailKit" Version="2.1.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
   </ItemGroup>
@@ -37,6 +171,15 @@
   <ItemGroup>
     <ProjectReference Include="..\..\TeknoMarketData\TeknoMarketData.csproj" />
     <ProjectReference Include="..\MigrationsSqlServer\MigrationsSqlServer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\lib\fonts\icomoon\selection.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\lib\fonts\themefisher-font\selection.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

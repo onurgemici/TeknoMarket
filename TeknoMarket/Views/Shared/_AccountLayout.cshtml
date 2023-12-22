@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <title>@ViewData["Title"] - TeknoMarkt</title>
+    <link href="~/lib/fonts/icomoon/style.css" rel="stylesheet" />
+    <link href="~/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+
+
+
+
+
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+
+</head>
+
+
+<body>
+
+    <div class="d-md-flex half">
+        <div class="bg"></div>
+    <div class="contents">
+ 
+            @RenderBody()
+        </div>
+
+
+    </div>
+    <script src="~/lib/js/bootstrap.min.js"></script>
+    <script src="~/lib/js/jquery-3.3.1.min.js"></script>
+    <script src="~/lib/js/main.js"></script>
+    <script src="~/lib/js/popper.min.js"></script>
+   
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

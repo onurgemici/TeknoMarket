@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TeknoMarket;
 using TeknoMarketData;
+using TeknoMarketServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -73,8 +74,10 @@ builder
             Password = builder.Configuration["EMail:Password"],
             // enable ssl or tls
             Security = builder.Configuration.GetValue<bool>("EMail:SSL")
-        });
+        }); 
     });
+
+builder.Services.AddTeknoMarket();
 
 var app = builder.Build();
 
@@ -92,9 +95,16 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseTeknoMarket();
+app.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
 app.Run();

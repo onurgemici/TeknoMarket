@@ -118,10 +118,10 @@ namespace TeknoMarket.Controllers
                 var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
                 var url = Url.Action(nameof(ConfirmEmail), "Account", new { id = user.Id, token }, Request.Scheme);
                 var body = string.Format(
-                    System.IO.File.ReadAllText(Path.Combine(env.WebRootPath, "templates", "emailconfirmation.html")),
-                    model.Name,
-                    url);
-                emailService.Send(model.UserName, "MVCRE E-Posta Doğrulama Mesajı", body, isHtml: true);
+                         System.IO.File.ReadAllText(Path.Combine(env.WebRootPath, "templates", "emailconfirmation.html")),
+                         model.Name,
+                         url);
+                emailService.Send(model.UserName, "RE E-Posta Doğrulama Mesajı", body, isHtml: true);
                 return View("RegisterSuccess");
             }
             else

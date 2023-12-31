@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeknoMarketData", "..\Tekno
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", "{AE06A710-B84B-44BC-AF38-F00B44A2ED4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrationsPostgreSql", "MigrationsPostgreSql\MigrationsPostgreSql.csproj", "{88776F69-B3D3-40D6-BB7A-AE5845BA4E4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationsPostgreSql", "MigrationsPostgreSql\MigrationsPostgreSql.csproj", "{88776F69-B3D3-40D6-BB7A-AE5845BA4E4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrationsMySql", "MigrationsMySql\MigrationsMySql.csproj", "{411CF7E5-EBFE-4738-A932-A45FA3F28CF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationsMySql", "MigrationsMySql\MigrationsMySql.csproj", "{411CF7E5-EBFE-4738-A932-A45FA3F28CF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrationsSqlServer", "MigrationsSqlServer\MigrationsSqlServer.csproj", "{20D3205E-2C69-4207-8CCA-5382629E69EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationsSqlServer", "MigrationsSqlServer\MigrationsSqlServer.csproj", "{20D3205E-2C69-4207-8CCA-5382629E69EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeknoMarketServices", "TeknoMarketServices\TeknoMarketServices.csproj", "{0544F906-3433-4F13-9EDB-FD67160F1D44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{20D3205E-2C69-4207-8CCA-5382629E69EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20D3205E-2C69-4207-8CCA-5382629E69EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20D3205E-2C69-4207-8CCA-5382629E69EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0544F906-3433-4F13-9EDB-FD67160F1D44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0544F906-3433-4F13-9EDB-FD67160F1D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0544F906-3433-4F13-9EDB-FD67160F1D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0544F906-3433-4F13-9EDB-FD67160F1D44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

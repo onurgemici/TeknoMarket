@@ -2,7 +2,145 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    #itemboxes {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    .item-box {
+        background-color: #f8f9fa; /* Grey background color */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Dark shadow */
+        margin-bottom: 20px;
+        padding: 20px;
+        max-width: 21rem;
+        max-height:30rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .item-image {
+        max-width: 100%;
+        height: auto;
+    
+    }
+
+    .carousel{
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3); /* Dark shadow */
+    }
+</style>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="https://teknohype.com/wp-content/uploads/2023/05/rogally3.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="https://i.ytimg.com/vi/sy7_94HZlBk/maxresdefault.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="https://dlcdnwebimgs.asus.com/gain/D13F7FE1-A4F5-48D1-977F-FFC564F75441" alt="Third slide">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
+
+<hr />
+
+<div id="itemboxes" class="container mt-4">
+    <section class="row">
+        <div class="col-md-4">
+            <div class="item-box">
+                <img src="https://placehold.it/300x200" alt="Item Image" class="item-image">
+                <h3>Item Name</h3>
+                <p>Description of the item goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <button class="btn btn-primary">Add to Basket</button>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="item-box">
+                <img src="https://placehold.it/300x200" alt="Item Image" class="item-image">
+                <h3>Item Name</h3>
+                <p>Description of the item goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <button class="btn btn-primary">Add to Basket</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="item-box">
+                <img src="https://placehold.it/300x200" alt="Item Image" class="item-image">
+                <h3>Item Name</h3>
+                <p>Description of the item goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <button class="btn btn-primary">Add to Basket</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="item-box">
+                <img src="https://placehold.it/300x200" alt="Item Image" class="item-image">
+                <h3>Item Name</h3>
+                <p>Description of the item goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <button class="btn btn-primary">Add to Basket</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="item-box">
+                <img src="https://placehold.it/300x200" alt="Item Image" class="item-image">
+                <h3>Item Name</h3>
+                <p>Description of the item goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <button class="btn btn-primary">Add to Basket</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="item-box">
+                <img src="https://placehold.it/300x200" alt="Item Image" class="item-image">
+                <h3>Item Name</h3>
+                <p>Description of the item goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <button class="btn btn-primary">Add to Basket</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="item-box">
+                <img src="https://placehold.it/300x200" alt="Item Image" class="item-image">
+                <h3>Item Name</h3>
+                <p>Description of the item goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <button class="btn btn-primary">Add to Basket</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="item-box">
+                <img src="https://placehold.it/300x200" alt="Item Image" class="item-image">
+                <h3>Item Name</h3>
+                <p>Description of the item goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <button class="btn btn-primary">Add to Basket</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="item-box">
+                <img src="https://placehold.it/300x200" alt="Item Image" class="item-image">
+                <h3>Item Name</h3>
+                <p>Description of the item goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <button class="btn btn-primary">Add to Basket</button>
+            </div>
+        </div>
+        <!-- Add more item boxes as needed -->
+
+    </section>
+</div>
+<hr />

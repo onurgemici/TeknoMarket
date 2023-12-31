@@ -6,7 +6,7 @@ namespace TeknoMarket;
 
 public static class AppExtensions
 {
-    public static IApplicationBuilder UseQuasarShop(this IApplicationBuilder builder)
+    public static IApplicationBuilder UseTeknoMarket(this IApplicationBuilder builder)
     {
 
         using var scope = builder.ApplicationServices.CreateScope();

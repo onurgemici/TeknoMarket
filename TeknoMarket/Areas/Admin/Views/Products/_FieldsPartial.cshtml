@@ -1,0 +1,63 @@
+﻿@model ProductViewModel
+<div class="mb-3 col-12 col-lg-4">
+    <label class="form-label" asp-for="Name"></label>
+    <input class="form-control" asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+</div>
+<div class="mb-3 col-12">
+    <label class="form-label" asp-for="Catalogs"></label>
+    <div class="row row-cols-1 row-cols-lg-6">
+        @foreach (var catalog in (ViewBag.Catalogs as IEnumerable<SelectListItem>)!)
+        {
+            <div class="col">
+                <div class="form-check form-switch">
+                    <input id="catalog_@catalog.Value" type="checkbox" class="form-check-input" name="Catalogs" value="@catalog.Value"/>
+                    <label for="catalog_@catalog.Value" class="form-check-label">@catalog.Text</label>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="mb-3 col-12 col-lg-4">
+    <label class="form-label" asp-for="Image"></label>
+    <input class="form-control" asp-for="Image" />
+</div>
+
+<div class="mb-3 col-12 col-lg-4">
+    <label class="form-label" asp-for="Images"></label>
+    <input class="form-control" asp-for="Images" multiple />
+</div>
+<div class="row m-0 col-12 col-lg-4">
+    <div class="mb-3 col-6">
+        <label class="form-label" asp-for="Price"></label>
+        <input class="form-control" asp-for="Price" />
+        <span asp-validation-for="Price"></span>
+    </div>
+    <div class="mb-3 col-6">
+        <label class="form-label" asp-for="DiscountRate"></label>
+        <input class="form-control" asp-for="DiscountRate" />
+        <span asp-validation-for="DiscountRate"></span>
+    </div>
+
+</div>
+
+<div class="mb-3 col-6">
+    <label class="form-label">İndirimli Fiyat</label>
+    <input id="DiscountedPrice" class="form-control" readonly />
+</div>
+
+
+
+<div class="mb-3 col-12">
+    <label class="form-label" asp-for="Description"></label>
+    <textarea class="form-control" asp-for="Description"></textarea>
+    <span asp-validation-for="Description"></span>
+</div>
+
+<div class="mb-3 col-12 col-lg-4">
+    <div class="form-check form-switch">
+        <input type="checkbox" class="form-check-input" asp-for="Enabled" />
+        <label class="form-check-label" asp-for="Enabled"></label>
+    </div>
+</div>

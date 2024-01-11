@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TeknoMarket.Models;
 using TeknoMarketData;
 using TeknoMarketData.Infrastructure;
@@ -26,7 +27,7 @@ public class CatalogsController : ControllerBase
     [Authorize(Roles = "Administrators,ProductAdministrators,OrderAdministrators")]
     public async Task<IActionResult> Index()
     {
-        return View(await catalogsService.GetAll());
+        return View(await catalogsService.GetAll().ToListAsync());
     }
     public IActionResult Create()
     {

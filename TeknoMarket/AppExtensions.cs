@@ -22,7 +22,7 @@ public static class AppExtensions
         roleManager.CreateAsync(new Role { Name = "OrderAdministrators" }).Wait();
         roleManager.CreateAsync(new Role { Name = "Members" }).Wait();
 
-        var user = new User
+        var user = new Manager
         {
             UserName = configuration.GetValue<string>("Security:DefaultUser:UserName"),
             Email = configuration.GetValue<string>("Security:DefaultUser:UserName"),

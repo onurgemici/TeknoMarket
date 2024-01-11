@@ -1,0 +1,36 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Ürün Güncelleme";
+    //var getUrl = $"/Admin/Products/SelectedCatalogs/{Model.Id}";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <partial name="_FieldsPartial" model="Model" />
+
+    <hr />
+    <partial name="_FormButtonsPartial" />
+</form>
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(() => {
+            $.ajax({
+                url: "/Admin/Products/SelectedCatalogs/00120605-692e-4055-d423-08dc12cdeace", success: function (result) {
+                    $("#div1").html(result);
+                    $("#catalog_catalog.Value").prop("checked", true);
+                }
+            });
+            
+            $('#Price').on('change', getDiscountedPrice);
+            $('#DiscountRate').on('change', getDiscountedPrice);
+
+            function getDiscountedPrice(e) {
+                const price = $('#Price').val();
+                const discountRate = $('#DiscountRate').val();
+
+                $('#DiscountedPrice').val(price - (price * discountRate / 100));
+            }
+        });
+    </script>
+}

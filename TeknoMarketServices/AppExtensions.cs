@@ -16,6 +16,9 @@ public static class AppExtensions
         services
          .AddScoped<IProductsService, ProductsService>();
 
+        services
+       .AddScoped<IFilesService, FileService>();
+
 
         return services;
     }

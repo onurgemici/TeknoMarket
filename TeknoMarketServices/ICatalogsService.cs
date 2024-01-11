@@ -10,7 +10,7 @@ namespace TeknoMarketServices;
 
 public interface ICatalogsService
 {
-    Task<List<Catalog>> GetAll();
+    IQueryable<Catalog> GetAll();
 
     Task<Catalog?> GetById(Guid id);
 
@@ -54,9 +54,9 @@ public class CatalogsService : ICatalogsService
         await context.SaveChangesAsync();
     }
 
-public Task<List<Catalog>> GetAll()
+    public IQueryable<Catalog> GetAll()
     {
-        return context.Catalogs.ToListAsync();
+        return context.Catalogs.AsQueryable<Catalog>();
     }
 
     public Task<Catalog?> GetById(Guid id)

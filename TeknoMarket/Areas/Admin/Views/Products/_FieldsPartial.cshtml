@@ -11,7 +11,7 @@
         {
             <div class="col">
                 <div class="form-check form-switch">
-                    <input id="catalog_@catalog.Value" type="checkbox" class="form-check-input" name="Catalogs" value="@catalog.Value"/>
+                    <input id="catalog_@catalog.Value" type="checkbox" class="form-check-input" name="Catalogs" @(Model.Catalogs.Any(p => p.ToString() == catalog.Value) ? "checked" : "") value="@catalog.Value" />
                     <label for="catalog_@catalog.Value" class="form-check-label">@catalog.Text</label>
                 </div>
             </div>

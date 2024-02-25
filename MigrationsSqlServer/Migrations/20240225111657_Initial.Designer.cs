@@ -12,8 +12,8 @@ using TeknoMarketData;
 namespace MigrationsSqlServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231219180942_Tekno")]
-    partial class Tekno
+    [Migration("20240225111657_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -349,12 +349,6 @@ namespace MigrationsSqlServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Image")
                         .IsRequired()
                         .IsUnicode(false)
@@ -370,9 +364,7 @@ namespace MigrationsSqlServer.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ProductImage");
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("TeknoMarketData.Role", b =>
@@ -440,11 +432,6 @@ namespace MigrationsSqlServer.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -501,9 +488,7 @@ namespace MigrationsSqlServer.Migrations
 
                     b.ToTable("AspNetUsers", (string)null);
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("TeknoMarketData.UserAddress", b =>
@@ -518,12 +503,6 @@ namespace MigrationsSqlServer.Migrations
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("ManagerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ManagerId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -537,10 +516,6 @@ namespace MigrationsSqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ManagerId");
-
-                    b.HasIndex("ManagerId1");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("UserAddresses");
@@ -550,14 +525,14 @@ namespace MigrationsSqlServer.Migrations
                 {
                     b.HasBaseType("TeknoMarketData.User");
 
-                    b.HasDiscriminator().HasValue("Customer");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("TeknoMarketData.Manager", b =>
                 {
                     b.HasBaseType("TeknoMarketData.User");
 
-                    b.HasDiscriminator().HasValue("Manager");
+                    b.ToTable("Managers", (string)null);
                 });
 
             modelBuilder.Entity("CatalogProduct", b =>
@@ -716,15 +691,7 @@ namespace MigrationsSqlServer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TeknoMarketData.Manager", "User")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Product");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TeknoMarketData.ShoppingCartItem", b =>
@@ -748,14 +715,6 @@ namespace MigrationsSqlServer.Migrations
 
             modelBuilder.Entity("TeknoMarketData.UserAddress", b =>
                 {
-                    b.HasOne("TeknoMarketData.Manager", null)
-                        .WithMany("BillingAddresses")
-                        .HasForeignKey("ManagerId");
-
-                    b.HasOne("TeknoMarketData.Manager", null)
-                        .WithMany("DeliveryAddresses")
-                        .HasForeignKey("ManagerId1");
-
                     b.HasOne("TeknoMarketData.Customer", "User")
                         .WithMany("Addresses")
                         .HasForeignKey("UserId")
@@ -763,6 +722,24 @@ namespace MigrationsSqlServer.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TeknoMarketData.Customer", b =>
+                {
+                    b.HasOne("TeknoMarketData.User", null)
+                        .WithOne()
+                        .HasForeignKey("TeknoMarketData.Customer", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TeknoMarketData.Manager", b =>
+                {
+                    b.HasOne("TeknoMarketData.User", null)
+                        .WithOne()
+                        .HasForeignKey("TeknoMarketData.Manager", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TeknoMarketData.Order", b =>
@@ -794,15 +771,9 @@ namespace MigrationsSqlServer.Migrations
 
             modelBuilder.Entity("TeknoMarketData.Manager", b =>
                 {
-                    b.Navigation("BillingAddresses");
-
                     b.Navigation("CarouselImages");
 
                     b.Navigation("Catalogs");
-
-                    b.Navigation("DeliveryAddresses");
-
-                    b.Navigation("ProductImages");
 
                     b.Navigation("Products");
                 });

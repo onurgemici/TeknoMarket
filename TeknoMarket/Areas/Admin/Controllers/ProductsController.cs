@@ -22,8 +22,7 @@ public class ProductsController : ControllerBase
     private readonly ICatalogsService catalogsService;
     private readonly IFilesService filesService;
     private readonly IWebHostEnvironment webHostEnvironment;
-
-    private readonly string entityName = "Katalog";
+    private readonly string entityName = "Ürün";
     public ProductsController(
         IProductsService productsService,
         ICatalogsService catalogsService,
@@ -35,19 +34,23 @@ public class ProductsController : ControllerBase
         this.catalogsService = catalogsService;
         this.filesService = filesService;
         this.webHostEnvironment = webHostEnvironment;
-        this.catalogsService = catalogsService;
-    }
+    }   
 
     [Authorize(Roles = "Administrators,ProductAdministrators,OrderAdministrators")]
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var result = productsService.GetAll().Include(p => p.User).Include(p => p.Catalogs).ToList();
+        var result = await productsService.GetProductsAsync();
         return View(result);
     }
     public async Task<IActionResult> Create()
     {
-        ViewBag.Catalogs = (await catalogsService.GetAll().Where(p => p.Enabled).OrderBy(p => p.Name).Select(p => new { p.Id, p.Name }).ToListAsync()).Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Name }).ToList();
+        await PopulateDropdowns();
         return View(new ProductViewModel { Enabled = true, DiscountRate = "0" });
+    }
+
+    private async Task PopulateDropdowns()
+    {
+        ViewBag.Catalogs = (await catalogsService.GetAll().Where(p => p.Enabled).OrderBy(p => p.Name).Select(p => new { p.Id, p.Name }).ToListAsync()).Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Name }).ToList();
     }
 
     [HttpPost]
@@ -79,34 +82,49 @@ public class ProductsController : ControllerBase
     }
     public async Task<IActionResult> Edit(Guid id)
     {
-        ViewBag.Catalogs = (await catalogsService.GetAll().Where(p => p.Enabled).OrderBy(p => p.Name).Select(p => new { p.Id, p.Name }).ToListAsync()).Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Name }).ToList();
-        var item = await productsService.GetById(id);
+        var item = await productsService.GetByIdWithCatalogs(id);
         if (item is null)
             return RedirectToAction(nameof(Index));
+        await PopulateDropdowns();
         return View(new ProductViewModel
         {
             Name = item.Name,
             Enabled = item.Enabled,
             Description = item.Description,
-            Price =  item.Price.ToString(),
-            DiscountRate =  item.DiscountRate.ToString(),
-            //Image = item.Image,
-            //Images = item.ProductImages,
-            Catalogs = item.Catalogs.Select(x => x.Id)
+            DiscountRate = item.DiscountRate.ToString(),
+            OriginalImage = item.Image,
+            OriginalImages = item.ProductImages.Select(p => new OriginalImage { Id = p.Id, Image = p.Image }).ToList(),
+            Price = item.Price.ToString("f2", CultureInfo.CreateSpecificCulture("tr-TR")),
+            Catalogs = item.Catalogs.Select(p => p.Id).ToList()
         });
     }
 
     [HttpPost]
     public async Task<IActionResult> Edit(Guid id, ProductViewModel model)
     {
-        var item = await productsService.GetById(id);
+        var image = model.Image is not null ? await filesService.ResizeImageAsync(
+                model.Image.OpenReadStream(),
+                IO.File.Open(Path.Combine(webHostEnvironment.WebRootPath, "lib", "images", "logo.png"), FileMode.Open, FileAccess.Read, FileShare.Read),
+                new SixLabors.ImageSharp.Size(800, 600)) : default;
+        var images = model.Images is not null ? model.Images.Select(p => filesService.ResizeImageAsync(
+                        p.OpenReadStream(),
+                        IO.File.Open(Path.Combine(webHostEnvironment.WebRootPath, "lib", "images", "logo.png"), FileMode.Open, FileAccess.Read, FileShare.Read),
+                        new SixLabors.ImageSharp.Size(800, 600)).Result) : default;
+
+
+        var item = await productsService.GetByIdWithCatalogs(id);
 
         item.Name = model.Name;
         item.Enabled = model.Enabled;
+        item.Price = decimal.Parse(model.Price, CultureInfo.CreateSpecificCulture("tr-TR"));
+        item.Description = model.Description;
+        item.DiscountRate = int.Parse(model.DiscountRate);
+        if (image is not null)
+            item.Image = image;
 
         TempData["success"] = $"{entityName} güncelleme işlemi başarıyla tamamlanmıştır!";
 
-        await productsService.Update(item);
+        await productsService.Update(item, model.Catalogs, images, model.ImagesToDelete);
         return RedirectToAction(nameof(Index));
     }
 
@@ -116,13 +134,6 @@ public class ProductsController : ControllerBase
         TempData["success"] = $"{entityName} silme işlemi başarıyla tamamlanmıştır!";
         return RedirectToAction(nameof(Index));
     }
-    [HttpGet]
-    public async Task<IActionResult> SelectedCatalogs(Guid id)
-    {
-        var item = await productsService.GetById(id);
-        if (item is null)
-            throw new Exception("Product is not avaiable");
-        return Json(item.Catalogs.Select(x => x.Id));
-    }
+
 
 }

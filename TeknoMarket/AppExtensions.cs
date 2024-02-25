@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using TeknoMarketData;
 
 namespace TeknoMarket;
@@ -15,6 +16,7 @@ public static class AppExtensions
         var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
         var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+
         context.Database.Migrate();
 
         roleManager.CreateAsync(new Role { Name = "Administrators" }).Wait();
@@ -32,7 +34,7 @@ public static class AppExtensions
 
         userManager.CreateAsync(user, configuration.GetValue<string>("Security:DefaultUser:Password")).Wait(); ;
         userManager.AddToRoleAsync(user, "Administrators").Wait();
-
+        var claimResult = userManager.AddClaimAsync(user, new Claim(ClaimTypes.GivenName, configuration.GetValue<string>("Security:DefaultUser:Name"))).Result;
 
         return builder;
     }

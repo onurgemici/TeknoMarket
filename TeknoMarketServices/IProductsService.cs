@@ -14,6 +14,7 @@ public interface IProductsService
     Task<Product?> GetById(Guid id);
 
     Task<Product?> GetByIdWithCatalogs(Guid id);
+    Task<List<ProductListResponse>> GetProductsAsync();
 
     Task Create(Product item);
 
@@ -25,7 +26,7 @@ public interface IProductsService
 
     string? GetProductImage(Guid id);
     byte[]? GetProductImageBytes(Guid id);
-    Task<List<ProductsResponse>> GetProductsAsync();
+
 }
 
 public class ProductsService : IProductsService
@@ -88,11 +89,7 @@ public class ProductsService : IProductsService
     {
         return context.Products.AsQueryable<Product>();
     }
-    public async Task<List<ProductsResponse>> GetProductsAsync()
-    {
-        return await context.Products
-            .Select(p => new ProductsResponse(p.Id,p.Name,p.Price,p.Catalogs,p.Enabled,p.User.Name,p.DateCreated,p.Image,p.DiscountedPrice,p.DiscountRate,p.Catalogs.Select(q => q.Name))).ToListAsync();
-    }
+
     public Task<Product?> GetById(Guid id)
     {
         return context.Products.SingleOrDefaultAsync(p => p.Id == id);
@@ -111,5 +108,9 @@ public class ProductsService : IProductsService
     {
         return Convert.FromBase64String(GetProductImage(id).Replace("data:image/jpeg;base64,", ""));
     }
-
+    public async Task<List<ProductListResponse>> GetProductsAsync()
+    {
+        return await context.Products
+            .Select(p => new ProductListResponse(p.Id, p.Name, p.Price, p.Image, p.DiscountedPrice, p.DiscountRate)).ToListAsync();
+    }
 }

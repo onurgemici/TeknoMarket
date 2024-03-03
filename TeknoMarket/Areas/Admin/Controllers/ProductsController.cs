@@ -10,6 +10,7 @@ using SixLabors;
 using Microsoft.AspNetCore.Hosting;
 using IO = System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using X.PagedList;
 namespace TeknoMarket.Areas.Admin.Controllers;
 
 
@@ -37,15 +38,16 @@ public class ProductsController : ControllerBase
     }   
 
     [Authorize(Roles = "Administrators,ProductAdministrators,OrderAdministrators")]
-    public async Task<IActionResult> Index()
+    public IActionResult Index(int? page)
     {
-        var result = await productsService.GetProductsAsync();
+        var result = productsService
+            .GetAll().Include(p => p.User).Include(p => p.Catalogs).ToPagedList(page ?? 1, 10);
         return View(result);
     }
     public async Task<IActionResult> Create()
     {
         await PopulateDropdowns();
-        return View(new ProductViewModel { Enabled = true, DiscountRate = "0" });
+        return View(new ProductViewModel { Enabled = true, DiscountRate = "0", Price = "0"});
     }
 
     private async Task PopulateDropdowns()
@@ -68,7 +70,7 @@ public class ProductsController : ControllerBase
         await productsService.Create(
             model.Name,
             model.Enabled,
-            UserId,
+            UserId!,
             description: model.Description,
             price: decimal.Parse(model.Price, CultureInfo.CreateSpecificCulture("tr-TR")),
             discountRate: int.Parse(model.DiscountRate),

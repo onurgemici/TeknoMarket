@@ -19,11 +19,33 @@
     </div>
 </div>
 
+@if (ViewContext.RouteData.Values["action"]?.ToString() == "Edit")
+{
+    <div class="mb-3 col-12 col-lg-4">
+        <img src="@Model.OriginalImage" width="400" height="300" />
+    </div>
+}
 <div class="mb-3 col-12 col-lg-4">
     <label class="form-label" asp-for="Image"></label>
     <input class="form-control" asp-for="Image" />
 </div>
 
+@if (ViewContext.RouteData.Values["action"]?.ToString() == "Edit")
+{
+    <div class="mb-3 col-12 col-lg-12">
+        <div class="d-flex gap-2">
+            @foreach (var image in Model.OriginalImages)
+            {
+                <div class="p-1 border bg-white shadow-sm d-flex flex-column gap-2 ">
+                    <img src="@image.Image" width="200" height="150" />
+                    <label>
+                        <input type="checkbox" name="ImagesToDelete" value="@image.Id" /> Sil
+                    </label>
+                </div>
+            }
+        </div>
+    </div>
+}
 <div class="mb-3 col-12 col-lg-4">
     <label class="form-label" asp-for="Images"></label>
     <input class="form-control" asp-for="Images" multiple />
@@ -44,7 +66,7 @@
 
 <div class="mb-3 col-6">
     <label class="form-label">İndirimli Fiyat</label>
-    <input id="DiscountedPrice" class="form-control" readonly />
+    <input id="DiscountedPrice" class="form-control" readonly value="@Model.DiscountedPrice" />
 </div>
 
 

@@ -3593,6 +3593,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\CarouselImages\Create.cshtml" />
+    <None Include="Areas\Admin\Views\CarouselImages\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\CarouselImages\Index.cshtml" />
+    <None Include="Areas\Admin\Views\CarouselImages\_FieldsPartial.cshtml" />
     <None Include="Areas\Admin\Views\Products\Create.cshtml" />
     <None Include="Areas\Admin\Views\Products\Edit.cshtml" />
     <None Include="Areas\Admin\Views\Products\Index.cshtml" />
@@ -7239,6 +7243,7 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.1" />
+    <PackageReference Include="X.PagedList" Version="8.4.7" />
   </ItemGroup>
 
   <ItemGroup>

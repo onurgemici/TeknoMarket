@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeknoMarket;
 
 namespace TeknoMarketServices;
 public static class AppExtensions
@@ -18,6 +19,8 @@ public static class AppExtensions
 
         services
        .AddScoped<IFilesService, FileService>();
+        services
+    .AddScoped<ICarouselImageService, CarouselImageService>();
 
 
         return services;

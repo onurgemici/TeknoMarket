@@ -2,11 +2,28 @@
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using TeknoMarketData;
+using TeknoMarketServices;
 
 namespace TeknoMarket;
 
 public static class AppExtensions
 {
+
+    public static IServiceCollection AddQuasarShop(this IServiceCollection services)
+    {
+
+        services
+            .AddScoped<ICatalogsService, CatalogsService>();
+        services
+            .AddScoped<IProductsService, ProductsService>();
+        services
+            .AddScoped<IFilesService, FileService>();
+        services
+            .AddScoped<ICarouselImageService, CarouselImageService>();
+
+        return services;
+    }
+
     public static IApplicationBuilder UseTeknoMarket(this IApplicationBuilder builder)
     {
 

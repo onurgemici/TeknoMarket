@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TeknoMarketServices.Responses.ProductsResponse>
+﻿@model X.PagedList.PagedList<Product>
 @{
     ViewData["Title"] = "Ürün Listesi";
 }
@@ -22,11 +22,13 @@
                 <col />
                 <col width="90" />
             </colgroup>
+
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(model => model.Image)</th>
-                    <th>@Html.DisplayNameFor(model => model.Name)</th>
-                    <th>@Html.DisplayNameFor(model => model.Price)</th>
+                    <th>Görsel</th>
+                    <th>Ürün Adı</th>
+                    <th>Fiyat</th>
+                    <th>İndirim</th>
                     <th>Katalog</th>
                     <th>Durum</th>
                     <th>Kullanıcı Adı</th>
@@ -39,7 +41,7 @@
                 {
                     <tr>
                         <td>
-                            <img src="@Url.Action("productimage","files", new { area = "", id = item.Id})" class="img-fluid object-fit-contain" alt="@item.Name" height="80" width="80" onerror="this.onerror=null;this.src = '/lib/images/no-image.jpg'" />
+                            <img src="@item.Image" class="img-fluid object-fit-contain" alt="@item.Name" height="80" width="80" onerror="this.onerror=null;this.src = '/images/no-image.jpg'" />
                         </td>
                         <td>@item.Name</td>
                         <td>
@@ -54,13 +56,23 @@
                             }
                         </td>
                         <td>
+                            @if (item.DiscountRate > 0)
+                            {
+                                <div class="text-success fs-4">%@item.DiscountRate.ToString("n0")</div>
+                            }
+                            else
+                            {
+                                <div class="font-monospace text-right">İndirim Yok</div>
+                            }
+                        </td>
+                        <td>
                             @string.Join(", ", item.Catalogs.Select(p => p.Name))
                         </td>
                         <td>
                             <partial name="_EnabledIconsPartial" model="item.Enabled" />
                         </td>
                         <td>
-                            @item.UserName
+                            @item.User.Name
                         </td>
                         <td>
                             @item.DateCreated.ToLocalTime().Date.ToShortDateString()
@@ -80,8 +92,10 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="2">
-                        Toplam @Model.Count().ToString("n0") adet kayıt gösteriliyor.
+                    <td colspan="8">
+                        <div class="d-flex justify-content-center">
+                            <partial name="_PagedListPagerPartial" model="@Model" />
+                        </div>
                     </td>
                 </tr>
             </tfoot>

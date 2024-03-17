@@ -11,12 +11,13 @@ using System.Security.Claims;
 
 namespace TeknoMarket.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : ControllerBase
     {
         private readonly AppDbContext context;
         private readonly SignInManager<User> signInManager;
         private readonly UserManager<User> userManager;
         private readonly IEmailService emailService;
+        private readonly IProductsService productsService;
         private readonly IWebHostEnvironment env;
 
         public AccountController(
@@ -24,6 +25,7 @@ namespace TeknoMarket.Controllers
             SignInManager<User> signInManager,
             UserManager<User> userManager,
             IEmailService emailService,
+            IProductsService productsService,
             IWebHostEnvironment env
             )
         {
@@ -31,6 +33,7 @@ namespace TeknoMarket.Controllers
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.emailService = emailService;
+            this.productsService = productsService;
             this.env = env;
         }
 
@@ -96,7 +99,7 @@ namespace TeknoMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            var user = new User
+            var user = new Customer
             {
                 UserName = model.UserName,
                 Name = model.Name,
@@ -188,7 +191,12 @@ namespace TeknoMarket.Controllers
             await userManager.ResetPasswordAsync(user!, model.Token, model.NewPassword);
             return RedirectToAction(nameof(Login));
         }
-
+        [Authorize]
+        public async Task<IActionResult> AddToFavorites(Guid id, string? returnUrl)
+        {
+            await productsService.AddToFavorites(id, UserId!.Value);
+            return Redirect($"{(returnUrl ?? "/")}#{id}");
+        }
 
     }
 }

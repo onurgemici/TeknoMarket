@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeknoMarketData;
 
@@ -11,9 +12,11 @@ using TeknoMarketData;
 namespace MigrationsSqlServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240317115335_Favorites")]
+    partial class Favorites
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -657,7 +660,7 @@ namespace MigrationsSqlServer.Migrations
             modelBuilder.Entity("TeknoMarketData.Favorite", b =>
                 {
                     b.HasOne("TeknoMarketData.Product", "Product")
-                        .WithMany("Favorites")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -781,8 +784,6 @@ namespace MigrationsSqlServer.Migrations
             modelBuilder.Entity("TeknoMarketData.Product", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Favorites");
 
                     b.Navigation("OrderDetails");
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TeknoMarketData;
 using TeknoMarketServices.Responses;
 
-namespace TeknoMarketServices;
+namespace TeknoMarket;
 
 public interface ICatalogsService
 {

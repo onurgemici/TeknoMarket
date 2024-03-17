@@ -93,42 +93,13 @@
             <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5z" />
         </symbol>
     </svg>
-    <div class="search-popup">
-        <div class="search-popup-container">
-
-            <form role="search" method="get" class="search-form" action="">
-                <input type="search" id="search-form" class="search-field" placeholder="Type and press enter" value="" name="s" />
-                <button type="submit" class="search-submit"><svg class="search"><use xlink:href="#search"></use></svg></button>
-            </form>
-
-            <h5 class="cat-list-title">Browse Categories</h5>
-
-            <ul class="cat-list">
-                <li class="cat-list-item">
-                    <a href="#" title="Mobile Phones">Mobile Phones</a>
-                </li>
-                <li class="cat-list-item">
-                    <a href="#" title="Smart Watches">Smart Watches</a>
-                </li>
-                <li class="cat-list-item">
-                    <a href="#" title="Headphones">Headphones</a>
-                </li>
-                <li class="cat-list-item">
-                    <a href="#" title="Accessories">Accessories</a>
-                </li>
-                <li class="cat-list-item">
-                    <a href="#" title="Monitors">Monitors</a>
-                </li>
-                <li class="cat-list-item">
-                    <a href="#" title="Speakers">Speakers</a>
-                </li>
-                <li class="cat-list-item">
-                    <a href="#" title="Memory Cards">Memory Cards</a>
-                </li>
-            </ul>
-
+    @if (User.IsInRole("Administrators") || User.IsInRole("ProductAdministrators") || User.IsInRole("OrderAdministrators"))
+    {
+        <div class="d-flex justify-content-center py-2 bg-secondary">
+            <a class="text-white text-decoration-none" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Admin Dashboard</a>
         </div>
-    </div>
+    }
+   
 
     <header id="header" class="site-header header-scrolled position-relative text-black bg-light">
         <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
@@ -150,52 +121,8 @@
                     </div>
                     <div class="offcanvas-body">
                         <ul id="navbar" class="navbar-nav text-uppercase justify-content-center align-items-center flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link me-4 active" href="#billboard">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="#company-services">Services</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="#mobile-products">Products</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="#smart-watches">Watches</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="#yearly-sale">Sale</a>
-                            </li>
+                            @await Component.InvokeAsync("NavBar")
 
-                         
-                            <li class="nav-item dropdown dropdown-slide">
-                                <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="about.html" class="dropdown-item">About</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog.html" class="dropdown-item">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html" class="dropdown-item">Shop</a>
-                                    </li>
-                                    <li>
-                                        <a href="cart.html" class="dropdown-item">Cart</a>
-                                    </li>
-                                    <li>
-                                        <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-post.html" class="dropdown-item">Single Post</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-product.html" class="dropdown-item">Single Product</a>
-                                    </li>
-                                    <li>
-                                        <a href="contact.html" class="dropdown-item">Contact</a>
-                                    </li>
-                                </ul>
-                            </li>
                             <li class="nav-item">
                                 <div class="user-items ps-5">
                                     <ul class="d-flex justify-content-end list-unstyled">
@@ -241,22 +168,11 @@
 
                                             <li class="nav-item dropdown dropdown-slide">
                                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Hoş geldiniz
+                                                     Hoş geldiniz Sn. @User.FindFirst(System.Security.Claims.ClaimTypes.GivenName)!.Value
 
                                                 </a>
                                                     <ul class="dropdown-menu">
-
-                                                    @if (User.IsInRole("Administrators") || User.IsInRole("ProductAdministrators") || User.IsInRole("OrderAdministrators"))
-                                                    {
-                                                      
-                                                   
-                                                        <li>
-                                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Dashboard">
-                                                                <i class="bi bi-person-fill-check"></i>
-                                                            Admin Dashboard
-                                                        </a>
-                                                    </li>
-                                                    }
+                                                    
                                                         <li>
                                                             <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="ChangePassword">
                                                                 <i class="bi bi-key"></i>
@@ -408,38 +324,7 @@
         </div>
         <hr>
     </footer>
-    <div id="footer-bottom">
-        <div class="container">
-            <div class="row d-flex flex-wrap justify-content-between">
-                <div class="col-md-4 col-sm-6">
-                    <div class="Shipping d-flex">
-                        <p>We ship with:</p>
-                        <div class="card-wrap ps-2">
-                            <img src="images/dhl.png" alt="visa">
-                            <img src="images/shippingcard.png" alt="mastercard">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="payment-method d-flex">
-                        <p>Payment options:</p>
-                        <div class="card-wrap ps-2">
-                            <img src="images/visa.jpg" alt="visa">
-                            <img src="images/mastercard.jpg" alt="mastercard">
-                            <img src="images/paypal.jpg" alt="paypal">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="copyright">
-                        <p>
-                            © Copyright 2023 MiniStore. Design by <a href="https://templatesjungle.com/">TemplatesJungle</a> Distribution by <a href="https://themewagon.com">ThemeWagon</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <script src="~/lib/js/js2/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="~/lib/js/js2/bootstrap.bundle.min.js"></script>

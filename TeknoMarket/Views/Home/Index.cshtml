@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductListResponse>
+﻿
 @{
     ViewData["Title"] = "Home Page";
     var carouselImages = ViewBag.CarouselImages as IList<TeknoMarketData.CarouselImage> ?? Enumerable.Empty<TeknoMarketData.CarouselImage>();
@@ -71,29 +71,7 @@ else
 
 <hr />
 
-<div id="itemboxes" class="container mt-4">
-    <section class="row">
-        @foreach (var product in Model)
-        {
-            <div class="col-md-4">
-                <div class="item-box">
-                    <img src="@product.Image" alt="Item Image" class="item-image">
-                    <h5>@product.Name</h5>
-                    @if (product.DiscountRate > 0)
-                    {
-                        <p class="text-success fs-4">%@product.DiscountRate</p>
-                    }
-                    else
-                    {
-                        <p class="text-muted fs-4">-</p>
-                    }
+<div class="fs-4 text-secondary py-2 border-bottom mb-3">Çok Satanlar</div>
 
-
-                    <p class="text-dark fs-4">@product.DiscountedPrice.ToString("c2")</p>
-                    <a asp-action="Product" class="btn btn-primary" asp-route-id="@product.Id">Add to Basket</a>
-                </div>
-            </div>
-        }
-    </section>
-</div>
+<partial name="_ProductListPartial" model="ViewBag.BestSellers" />
 <hr />

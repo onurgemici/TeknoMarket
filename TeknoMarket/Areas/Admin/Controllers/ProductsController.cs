@@ -70,7 +70,7 @@ public class ProductsController : ControllerBase
         await productsService.Create(
             model.Name,
             model.Enabled,
-            UserId!,
+            UserId!.Value,
             description: model.Description,
             price: decimal.Parse(model.Price, CultureInfo.CreateSpecificCulture("tr-TR")),
             discountRate: int.Parse(model.DiscountRate),
@@ -136,6 +136,8 @@ public class ProductsController : ControllerBase
         TempData["success"] = $"{entityName} silme işlemi başarıyla tamamlanmıştır!";
         return RedirectToAction(nameof(Index));
     }
+
+
 
 
 }

@@ -3602,6 +3602,7 @@
     <None Include="Areas\Admin\Views\Products\Index.cshtml" />
     <None Include="Areas\Admin\Views\Products\_FieldsPartial.cshtml" />
     <None Include="compilerconfig.json" />
+    <None Include="Views\Shared\Components\NavBar\Default.cshtml" />
     <None Include="wwwroot\css\bootstrap.min.css" />
     <None Include="wwwroot\css\bootstrap.min.css.map" />
     <None Include="wwwroot\css\owl.carousel.min.css" />
@@ -7249,7 +7250,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\TeknoMarketData\TeknoMarketData.csproj" />
     <ProjectReference Include="..\MigrationsSqlServer\MigrationsSqlServer.csproj" />
-    <ProjectReference Include="..\TeknoMarketServices\TeknoMarketServices.csproj" />
   </ItemGroup>
 
   <ItemGroup>

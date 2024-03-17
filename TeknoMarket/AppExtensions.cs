@@ -9,17 +9,19 @@ namespace TeknoMarket;
 public static class AppExtensions
 {
 
-    public static IServiceCollection AddQuasarShop(this IServiceCollection services)
+    public static IServiceCollection AddTeknoMarket(this IServiceCollection services)
     {
 
         services
             .AddScoped<ICatalogsService, CatalogsService>();
         services
-            .AddScoped<IProductsService, ProductsService>();
+         .AddScoped<IProductsService, ProductsService>();
+
         services
-            .AddScoped<IFilesService, FileService>();
+       .AddScoped<IFilesService, FileService>();
         services
-            .AddScoped<ICarouselImageService, CarouselImageService>();
+    .AddScoped<ICarouselImageService, CarouselImageService>();
+
 
         return services;
     }

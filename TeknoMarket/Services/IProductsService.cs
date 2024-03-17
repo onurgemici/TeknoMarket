@@ -6,7 +6,7 @@ using TeknoMarketServices.Responses;
 using TeknoMarket.Models;
 
 
-namespace TeknoMarketServices;
+namespace TeknoMarket;
 
 
 public interface IProductsService
@@ -18,7 +18,17 @@ public interface IProductsService
     Task<Product?> GetByIdWithCatalogs(Guid id);
     Task<List<ProductListResponse>> GetProductsAsync();
 
+    Task<IEnumerable<ProductBoxViewModel>> GetBestSellersAsync(Guid? userId, int size = 10);
     Task<IEnumerable<ProductBoxViewModel>> GetByKeywords(string keywords, Guid? userId);
+
+    Task AddToFavorites(Guid productId, Guid userId);
+
+    Task<int> GetFavoriteCount(Guid userId);
+
+    Task ClearFavorites(Guid userId);
+    Task<List<Product>> GetFavoriteProducts(Guid userId);
+
+    Task RemoveFromFavorites(Guid productId, Guid userId);
 
     Task Create(Product item);
 
@@ -120,6 +130,24 @@ public class ProductsService : IProductsService
             .Select(p => new ProductListResponse(p.Id, p.Name, p.Price, p.Image, p.DiscountedPrice, p.DiscountRate)).ToListAsync();
     }
 
+    public async Task<IEnumerable<ProductBoxViewModel>> GetBestSellersAsync(Guid? userId, int size = 10)
+    {
+        return await context
+            .Products
+            .OrderByDescending(p => p.OrderDetails.Sum(q => q.Quantity))
+            .Take(size)
+            .Select(p => new ProductBoxViewModel
+            {
+                Id = p.Id,
+                Name = p.Name,
+                DiscountedPrice = p.DiscountedPrice,
+                DiscountRate = p.DiscountRate,
+                Image = p.Image,
+                Price = p.Price,
+            })
+            .ToListAsync();
+    }
+
     public async Task<IEnumerable<ProductBoxViewModel>> GetByKeywords(string keywords, Guid? userId)
     {
         var searchKeywords = Regex.Split(keywords.ToLower(), @"\s+").ToList();
@@ -141,4 +169,42 @@ public class ProductsService : IProductsService
             .ToList();
     }
 
+    public async Task AddToFavorites(Guid productId, Guid userId)
+    {
+        var user = await context.Users.SingleAsync(p => p.Id == userId) as Customer;
+        var favorite = user.Favorites.Where(p => p.ProductId == productId).FirstOrDefault();
+        if(favorite == null)
+        {
+            user.Favorites.Add(new Favorite { ProductId = productId, UserId = userId });
+        }
+        await context.SaveChangesAsync();
+    }
+
+    public async Task<int> GetFavoriteCount(Guid userId)
+    {
+        return await context
+            .Favorites
+            .CountAsync(p => p.UserId == userId);
+    }
+
+    public async Task<List<Product>> GetFavoriteProducts(Guid userId)
+    {
+        return await context
+            .Favorites
+            .AsNoTracking()
+            .Include(p => p.Product)
+            .Where(p => p.UserId == userId)
+            .Select(p => p.Product!)
+            .ToListAsync();
+    }
+
+    public async Task RemoveFromFavorites(Guid productId, Guid userId)
+    {
+        await context.Favorites.Where(p => p.ProductId == productId && p.UserId == userId).ExecuteDeleteAsync();
+    }
+
+    public async Task ClearFavorites(Guid userId)
+    {
+        await context.Favorites.Where(p => p.UserId == userId).ExecuteDeleteAsync();
+    }
 }

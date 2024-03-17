@@ -44,7 +44,7 @@ namespace TeknoMarket.Areas.Admin.Controllers
                  await filesService.ResizeImageAsync(model.ImageFile.OpenReadStream(), 1440, 480),
                  model.DateFirst,
                  model.DateEnd,
-                  UserId,
+                 UserId!.Value,
                  model.Enabled);
 
             return RedirectToAction(nameof(Index));

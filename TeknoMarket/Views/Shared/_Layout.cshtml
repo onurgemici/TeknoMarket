@@ -93,6 +93,17 @@
             <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5z" />
         </symbol>
     </svg>
+
+
+    <div id="spinner" class="spinner-wrapper">
+        <div class="logo-spinner">
+            <img src="~/lib/images/logo.png" style="width:20rem;">
+            <div class="spinner-border text-warning" style="width:3rem;height:3rem;" role="status">
+            </div>
+        </div>
+    </div>
+   
+    
     @if (User.IsInRole("Administrators") || User.IsInRole("ProductAdministrators") || User.IsInRole("OrderAdministrators"))
     {
         <div class="d-flex justify-content-center py-2 bg-secondary">
@@ -100,6 +111,8 @@
         </div>
     }
    
+
+
 
     <header id="header" class="site-header header-scrolled position-relative text-black bg-light">
         <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
@@ -326,12 +339,25 @@
         </div>
     </footer>
 
+
+    <script>
+        // Belirli bir süre sonra spinner'ı gizleme fonksiyonu
+        function hideSpinner() {
+            var spinnerElement = document.getElementById('spinner');
+            spinnerElement.style.display = 'none'; // Spinner'ı gizle
+        }
+
+        // Spinner'ı 2 saniye sonra gizle
+        setTimeout(hideSpinner, 1000); // 2 saniye (2000 milisaniye) beklet
+    </script>
     <script src="~/lib/js/js2/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="~/lib/js/js2/bootstrap.bundle.min.js"></script>
     <script src="~/lib/js/js2/plugins.js"></script>
     <script src="~/lib/js/js2/script.js"></script>
     <script src="~/js/modernizr.js"></script>
+
+   
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

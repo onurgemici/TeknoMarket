@@ -138,6 +138,18 @@ public class ProductsController : ControllerBase
     }
 
 
+    public async Task<IActionResult> EnableComment(Guid id)
+    {
+        await productsService.EnableComment(id);
+        return RedirectToAction("Index", "Dashboard");
+    }
+
+    public async Task<IActionResult> RemoveComment(Guid id)
+    {
+        await productsService.RemoveComment(id);
+        return RedirectToAction("Index", "Dashboard");
+    }
+
 
 
 }

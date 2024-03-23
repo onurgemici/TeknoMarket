@@ -12,11 +12,11 @@
         {
             <p class="text-success fs-4">% @Model.DiscountRate</p>
 
-            <div class="card-title fs-2 text-decoration-line-through">
+            <div class="card-title fs-4 text-decoration-line-through">
                 ₺ @Model.Price.ToString("n2")
             </div>
 
-            <p class="text-success fs-4  ">@Model.DiscountedPrice.ToString("c2")</p>
+            <p class="text-success fs-2  ">@Model.DiscountedPrice.ToString("c2")</p>
         }
         else
         {

@@ -4,19 +4,22 @@ using TeknoMarketData;
 
 namespace TeknoMarket.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Administrators,ProductAdministrators")]
+ [Area("Admin")]
+    [Authorize(Roles = "Administrators, ProductAdministrators, OrderAdministrators")]
     public class DashboardController : Controller
     {
         private readonly AppDbContext context;
+        private readonly IProductsService productsService;
 
         public DashboardController(
-            AppDbContext context
+            AppDbContext context,
+            IProductsService productsService
             )
         {
             this.context = context;
+            this.productsService = productsService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var month = DateTime.Today.AddMonths(-1);
             var year = DateTime.Today.AddYears(-1);
@@ -40,6 +43,9 @@ namespace TeknoMarket.Areas.Admin.Controllers
             ViewBag.CommentsCount = context
                 .Comments
                 .Count(p => !p.Enabled);
+
+            ViewBag.NewComments = await productsService.GetAllNewCommentsAsync();
+
             return View();
         }
     }

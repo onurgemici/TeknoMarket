@@ -84,7 +84,6 @@
     </div>
 </div>
 
-
 <div class="row">
 
     <!-- Area Chart -->
@@ -92,30 +91,75 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Yeni Yorumlar</h6>
+
+            </div>
+            <!-- Card Body -->
+            <table class="table">
+                <colgroup>
+                    <col width="180" />
+                    <col width="180" />
+                    <col width="180" />
+                    <col />
+                    <col />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Tarih</th>
+                        <th>Saat</th>
+                        <th>Ürün</th>
+                        <th>Yazar</th>
+                        <th>Yorum</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var comment in ViewBag.NewComments as IEnumerable<GetCommentsViewModel>)
+                    {
+                        <tr>
+                            <td>@comment.Created.ToLocalTime().ToShortDateString() </td>
+                            <td>@comment.Created.ToLocalTime().ToShortTimeString() </td>
+                            <td>@comment.ProductName</td>
+                            <td>@comment.UserName</td>
+                            <td>@comment.Text</td>
+                            <td>
+                                <a asp-controller="Products" asp-action="EnableComment" asp-route-id="@comment.Id" class="btn btn-success">
+                                    <i class="bi bi-check"></i>
+                                </a>
+                                <a asp-controller="Products" asp-action="RemoveComment" asp-route-id="@comment.Id" class="btn btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+
                 </div>
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <div class="chart-area">
+                <div class="chart-pie pt-4 pb-2">
                     <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                    <canvas id="myChart" style="display: block; height: 320px; width: 801px;" width="1001" height="400" class="chartjs-render-monitor"></canvas>
+                    <canvas id="myPieChart" style="display: block; height: 245px; width: 801px;" width="1001" height="306" class="chartjs-render-monitor"></canvas>
                 </div>
+
             </div>
         </div>
     </div>
-</div>
 
 @section Scripts {
     <script src="~/js/chart.js/Chart.min.js"></script>

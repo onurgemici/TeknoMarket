@@ -7249,6 +7249,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MigrationsSqlServer\MigrationsSqlServer.csproj" />
+    <ProjectReference Include="..\TeknoMarketData\TeknoMarketData.csproj" />
   </ItemGroup>
 
   <ItemGroup>

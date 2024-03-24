@@ -23,7 +23,7 @@
    
 
 </head>
-<body class="bg-light" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabindex="0">
+<body class="bg-light d-flex flex-column min-vh-100" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabindex="0">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
             <title>Search</title>
@@ -114,7 +114,7 @@
 
 
 
-    <header id="header" class="site-header header-scrolled position-relative text-black bg-light">
+    <header id="header" class="site-header header-scrolled position-relative text-black bg-white">
         <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">
@@ -127,7 +127,7 @@
                 </button>
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
                     <div class="offcanvas-header px-4 pb-0">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" asp-controller="Home" asp-action="Index">
                             <img src="~/lib/images/logo.png"  style="width:6rem;">
                         </a>
                         <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
@@ -136,80 +136,18 @@
                         <ul id="navbar" class="navbar-nav text-uppercase justify-content-center align-items-center flex-grow-1 pe-3">
                             @await Component.InvokeAsync("NavBar")
 
-                            <li class="nav-item">
-                                <div class="user-items ps-5">
-                                    <ul class="d-flex justify-content-end list-unstyled">
-                                        <li class="search-item pe-3">
-                                            <a href="#" class="search-button">
-                                                <svg class="search">
-                                                    <use xlink:href="#search"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                      
-                                        <li>
-                                            <a href="cart.html">
-                                                <svg class="cart">
-                                                    <use xlink:href="#cart"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-
-                                        @if (!User.Identity.IsAuthenticated)
-                                        {
-
-                                            <li class="nav-item dropdown dropdown-slide ">
-                                                <a class="nav-link dropdown-toggle text-dark pe-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <svg class="user">
-                                                        <use xlink:href="#user"></use>
-                                                    </svg>
-                                                    </a>
-                                                    <ul class="dropdown-menu bg-light">
-                                                        <li class="nav-item">
-                                                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Account" asp-action="Login">Giriş Yap</a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Account" asp-action="Register">Üye Ol</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-
-                                        }
-          
-                                        @if (User.Identity.IsAuthenticated)
-                                        {
-
-                                            <li class="nav-item dropdown dropdown-slide">
-                                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                     Hoş geldiniz Sn. @User.FindFirst(System.Security.Claims.ClaimTypes.GivenName)!.Value
-
-                                                </a>
-                                                    <ul class="dropdown-menu">
-                                                    
-                                                        <li>
-                                                            <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="ChangePassword">
-                                                                <i class="bi bi-key"></i>
-                                                                Parola Değiştir
-                                                            </a>
-                                                        </li>
-                                                        <li><hr class="dropdown-divider"></li>
-                                                        <li>
-                                                            <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">
-                                                                <i class="bi bi-person-walking"></i> Çıkış
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-
-                                        }
-
-                                    </ul>
-                                </div>
-                            </li>
+                          
                         </ul>
+
                     </div>
+
                 </div>
+
+
             </div>
+
+
+
         </nav>
 
        
@@ -217,15 +155,15 @@
 
 
 
-    <div class="container">
+    <div class="container bg-grey">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
  
-        <hr>
-    <footer id="footer" class="overflow-hidden ">
+
+    <footer id="footer" class="footer mt-auto py-3 bg-light sticky-bottom bg-white">
         <div class="container">
             <div class="row">
                 <div class="footer-top-area">

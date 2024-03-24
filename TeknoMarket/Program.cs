@@ -96,11 +96,24 @@ app.UseRouting();
 
 app.UseAuthorization();
 app.UseTeknoMarket();
+
+
+
 app.MapControllerRoute(
       name: "areas",
       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
-
+app.MapControllerRoute("product",
+"{name}-p-{id}",
+defaults: new
+{
+    controller
+=
+"Home",
+    action
+=
+"Product"
+});
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

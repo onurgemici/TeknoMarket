@@ -2,7 +2,16 @@
     ViewData["Title"] = @Model.Name;
 }
 <div class="fs-1">@Model.Name</div>
-<div>@Model.Products.Count.ToString("n0")</div>
-<hr />
+@if (Model.Products.Count == 0)
+{
+    <div class="alert alert-warning" role="alert">
+        <h2>Üzgünüz, aradığınız kategoride ürün bulunamadı. &#128546;</h2>
+    </div>
+}
+else
+{
+    <div>Bulunan Ürün : @Model.Products.Count.ToString("n0") &#128513</div>
+}
+
 
 <partial name="_ProductListPartial" model="Model.Products" />

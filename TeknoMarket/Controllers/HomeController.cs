@@ -125,6 +125,34 @@ public class HomeController : ControllerBase
     }
 
     [Authorize]
+    public async Task<IActionResult> AddToShoppingCart(Guid id, int? quantity, string? returnUrl)
+    {
+        await productsService.AddToShoppingCart(id, UserId!.Value, quantity ?? 1);
+        return Redirect(returnUrl ?? "/");
+    }
+
+    [Authorize]
+    public async Task<IActionResult> Checkout()
+    {
+        return View(new CheckoutViewModel { ShoppingCartItems = await productsService.GetShoppingCart(UserId!.Value) });
+    }
+
+    [Authorize]
+    public async Task<IActionResult> RemoveFromShoppingCart(Guid id)
+    {
+        await productsService.RemoveFromCart(id);
+        return RedirectToAction(nameof(Checkout));
+    }
+
+    [Authorize]
+    public async Task<IActionResult> ClearShoppingCart()
+    {
+        await productsService.ClearShoppingCart(UserId!.Value);
+        return RedirectToAction(nameof(Checkout));
+    }
+
+
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> AddComment(CommentViewModel model)
     {

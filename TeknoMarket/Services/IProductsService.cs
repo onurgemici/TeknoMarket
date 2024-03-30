@@ -38,7 +38,15 @@ public interface IProductsService
 
     Task Delete(Guid id);
 
+    Task<int> GetShoppingCartCount(Guid userId);
 
+    Task<List<ShoppingCartItem>> GetShoppingCart(Guid userId);
+
+    Task AddToShoppingCart(Guid productId, Guid userId, int quantity);
+
+    Task ClearShoppingCart(Guid userId);
+
+    Task RemoveFromCart(Guid id);
 
     string? GetProductImage(Guid id);
     byte[]? GetProductImageBytes(Guid id);
@@ -215,6 +223,50 @@ public class ProductsService : IProductsService
     public async Task ClearFavorites(Guid userId)
     {
         await context.Favorites.Where(p => p.UserId == userId).ExecuteDeleteAsync();
+    }
+
+    public async Task AddToShoppingCart(Guid productId, Guid userId, int quantity)
+    {
+        var item = await context.ShoppingCartItems.SingleOrDefaultAsync(p => p.UserId == userId && p.ProductId == productId);
+        if (item is null)
+        {
+            item = new ShoppingCartItem { ProductId = productId, UserId = userId, Quantity = quantity };
+            context.ShoppingCartItems.Add(item);
+        }
+        else
+        {
+            item.Quantity += quantity;
+            context.ShoppingCartItems.Update(item);
+        }
+        await context.SaveChangesAsync();
+
+    }
+
+    public async Task<int> GetShoppingCartCount(Guid userId)
+    {
+        return await context
+            .ShoppingCartItems
+            .CountAsync(p => p.UserId == userId);
+    }
+
+    public async Task<List<ShoppingCartItem>> GetShoppingCart(Guid userId)
+    {
+        return await context
+            .ShoppingCartItems
+            .AsNoTracking()
+            .Include(p => p.Product)
+            .Where(p => p.UserId == userId)
+            .ToListAsync();
+    }
+
+    public async Task RemoveFromCart(Guid id)
+    {
+        await context.ShoppingCartItems.Where(p => p.Id == id).ExecuteDeleteAsync();
+    }
+
+    public async Task ClearShoppingCart(Guid userId)
+    {
+        await context.ShoppingCartItems.Where(p => p.UserId == userId).ExecuteDeleteAsync();
     }
 
     public async Task AddComment(Guid productId, Guid userId, string text, int rate)

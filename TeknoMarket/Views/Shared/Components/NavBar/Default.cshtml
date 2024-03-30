@@ -39,18 +39,25 @@
                 </a>
             </li>
 
+
+
+            <li class="nav-item ms-4">
+                <a class="btn btn-dark rounded position-relative" asp-controller="Home" asp-action="Checkout">
+                    <i class="bi bi-cart"></i>
+                    @if (Model.ShoppingCartItemCount > 0)
+                    {
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            @(Model.ShoppingCartItemCount >= 100 ? "99+" : Model.ShoppingCartItemCount.ToString())
+                            <span class="visually-hidden">Sepetim</span>
+                        </span>
+                    }
+                </a>
+            </li>
             <li class="nav-item ms-4">
                 <a class="search-button  btn btn-white rounded position-relative">
                     <i class="bi bi-search"></i>
                 </a>
             </li>
-
-            <li class="nav-item ms-4">
-                <a class="btn btn-white rounded position-relative">
-                    <i class="bi bi-basket"></i>
-                </a>
-            </li>
-
 
             <li class="nav-item ms-4">
                 <div class="user-items ps-5">

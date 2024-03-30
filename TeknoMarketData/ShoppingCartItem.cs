@@ -18,6 +18,9 @@ public class ShoppingCartItem
     [NotMapped]
     public decimal LineTotal => Quantity * Product!.DiscountedPrice;
 
+    [NotMapped]
+    public decimal BaseTotal => Quantity * Product!.Price;
+
 }
 
 public class ShoppingCartItemEntityTypeConfiguration : IEntityTypeConfiguration<ShoppingCartItem>

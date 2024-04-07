@@ -161,6 +161,13 @@ public class HomeController : ControllerBase
     }
 
 
+    [Authorize]
+    public async Task<IActionResult> Payment()
+    {
+        var result = await productsService.Payment(UserId!.Value);
+        return View(result);
+    }
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

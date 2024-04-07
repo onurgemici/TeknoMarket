@@ -59,7 +59,10 @@ public interface IProductsService
     Task EnableComment(Guid id);
     Task RemoveComment(Guid id);
 
+    Task<PaymentResult> Payment(Guid UserId);
 
+
+    Task<List<Order>> GetOrders(Guid userId);
 }
 
 public class ProductsService : IProductsService
@@ -337,5 +340,44 @@ public class ProductsService : IProductsService
     {
         await context.Comments.Where(p => p.Id == id).ExecuteDeleteAsync();
 
+    }
+
+    public async Task<PaymentResult> Payment(Guid userId)
+    {
+        if (1 != 1)
+        {
+            return new PaymentResult { Succeeded = false, Error = "bla bla..." };
+        }
+
+        var items = await GetShoppingCart(userId);
+        var order = new Order
+        {
+            Date = DateTime.UtcNow,
+            UserId = userId,
+            OrderDetails = items.Select(p => new OrderDetail
+            {
+                Price = p.Product!.DiscountedPrice,
+                Quantity = p.Quantity,
+                ProductId = p.ProductId,
+                DiscountRate = p.Product.DiscountRate
+            }).ToList()
+        };
+        context.Orders.Add(order);
+        await context.SaveChangesAsync();
+
+        await ClearShoppingCart(userId);
+
+        return new PaymentResult { Succeeded = true };
+    }
+
+    public async Task<List<Order>> GetOrders(Guid userId)
+    {
+        return await context
+             .Orders
+             .AsNoTracking()
+             .Include(p => p.OrderDetails)
+             .ThenInclude(p => p.Product)
+             .Where(p => p.UserId == userId)
+             .ToListAsync();
     }
 }

@@ -4,6 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TeknoMarketData;
 
+public enum DeliveryStatus : byte
+{
+    New, OnDelivery, Shipped
+}
+
 public class Order
 {
     public Guid Id { get; set; }
@@ -11,11 +16,15 @@ public class Order
     public DateTime Date { get; set; }
     public string? CargoTrackingNumber { get; set; }
 
+    public DeliveryStatus Status { get; set; } = DeliveryStatus.New;
+
+
     public virtual User? User { get; set; }
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new HashSet<OrderDetail>();
 
     [NotMapped]
     public decimal GrandTotal => OrderDetails.Sum(p => p.LineTotal);
+
 }
 
 

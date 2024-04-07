@@ -197,6 +197,12 @@ namespace TeknoMarket.Controllers
             await productsService.AddToFavorites(id, UserId!.Value);
             return Redirect($"{(returnUrl ?? "/")}#{id}");
         }
+        [Authorize]
+        public async Task<IActionResult> Orders()
+        {
+            var result = await productsService.GetOrders(UserId!.Value);
+            return View(result);
+        }
 
     }
 }

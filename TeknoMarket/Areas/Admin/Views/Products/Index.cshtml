@@ -5,6 +5,20 @@
 
 <partial name="_ToolbarPartial" />
 
+<div class="search-popup">
+    <div class="search-popup-container">
+
+        <form method="get" asp-action="Index">
+            <input type="search" class="form-control" name="keywords" id="keywords" placeholder="Ürün adıyla ara" value="@ViewContext.HttpContext.Request.Query["keywords"]" />
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="bi bi-search"></i>
+            </button>
+        </form>
+
+
+    </div>
+</div>
+
 @if (Model.Any())
 {
     <div class="card shadow">

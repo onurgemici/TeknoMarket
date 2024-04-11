@@ -100,11 +100,21 @@
                                         </a>
                                     </li>
                         <li>
+                                    @if (User.IsInRole("Administrators") || User.IsInRole("ProductAdministrators") || User.IsInRole("OrderAdministrators"))
+                                    {
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Orders" asp-action="Index">
+                                    <i class="bi bi-cart"></i>
+                                    Gelen Siparişler
+                                </a>
+
+                                    }
+                                    else
+{
                             <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Orders">
                                 <i class="bi bi-cart"></i>
                                 Siparişlerim
                             </a>
-
+                            }
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">

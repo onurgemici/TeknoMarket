@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using IO = System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using X.PagedList;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 namespace TeknoMarket.Areas.Admin.Controllers;
 
 
@@ -38,10 +39,16 @@ public class ProductsController : ControllerBase
     }   
 
     [Authorize(Roles = "Administrators,ProductAdministrators,OrderAdministrators")]
-    public IActionResult Index(int? page)
+    public IActionResult Index(int? page, string keywords)
     {
-        var result = productsService
-            .GetAll().Include(p => p.User).Include(p => p.Catalogs).ToPagedList(page ?? 1, 10);
+        IQueryable<Product> query = productsService.GetAll().Include(p => p.User).Include(p => p.Catalogs);
+
+        if (!string.IsNullOrEmpty(keywords))
+        {
+            query = query.Where(p => p.Name.Contains(keywords));
+        }
+
+        var result = query.ToPagedList(page ?? 1, 10);
         return View(result);
     }
     public async Task<IActionResult> Create()
@@ -149,7 +156,5 @@ public class ProductsController : ControllerBase
         await productsService.RemoveComment(id);
         return RedirectToAction("Index", "Dashboard");
     }
-
-
 
 }

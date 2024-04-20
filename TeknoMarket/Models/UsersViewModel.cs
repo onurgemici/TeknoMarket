@@ -9,6 +9,8 @@ namespace TeknoMarket.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public DateTime? DateOfBirth { get; set; }
+        public string UserAddress { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using TeknoMarket.Models;
 using TeknoMarketData;
 using TeknoMarket;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace TeknoMarket.Controllers;
@@ -15,17 +16,21 @@ public class HomeController : ControllerBase
     private readonly IProductsService productsService;
     private readonly ICatalogsService catalogsService;
     private readonly ILogger<HomeController> _logger;
+    private readonly AppDbContext context;
+
 
     public HomeController(
         ICarouselImageService carouselImageService,
         IProductsService productsService,
         ICatalogsService catalogsService,
-        ILogger<HomeController> logger)
+        ILogger<HomeController> logger,
+        AppDbContext context)
     {
         this.carouselImageService = carouselImageService;
         this.productsService = productsService;
         this.catalogsService = catalogsService;
         _logger = logger;
+        this.context = context;
 
     }
 
@@ -164,8 +169,21 @@ public class HomeController : ControllerBase
     [Authorize]
     public async Task<IActionResult> Payment()
     {
-        var result = await productsService.Payment(UserId!.Value);
-        return View(result);
+        ViewBag.Addresses = (await context.UserAddresses.AsNoTracking().Where(p => p.UserId == UserId!.Value).Select(p=> new { Id = p.Id, Name = p.Name}).ToListAsync()).Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Name }).ToList();
+        return View(new PaymentViewModel
+        {
+
+        });
+    }
+
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult> Payment(PaymentViewModel model)
+    {
+            context.UserAddresses.Add(new UserAddress {Name = model.AddressName, Text = model.Address, UserId = UserId!.Value });
+            await context.SaveChangesAsync();
+            await productsService.Payment(UserId!.Value);
+            return View("PaymentSuccess");
     }
 
 

@@ -1,14 +1,75 @@
-﻿@model PaymentResult
+﻿@model PaymentViewModel
 @{
 }
 
-@if (Model.Succeeded)
-{
-    <h2>Teşekkürler</h2>
-    <p>Siparişinizi aldık. Siparişlerinizi takip için <a asp-controller="Account" asp-action="Orders">tıklayınız.</a></p>
-}
-else
-{
-    <h2>Üzgünüz</h2>
-    <p>@Model.Error!</p>
-}
+<section class="p-4 p-md-5" style="
+    background-image: url(https://mdbcdn.b-cdn.net/img/Photos/Others/background3.webp);
+  ">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-5">
+            <div class="card rounded-3">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <h3>Ödemeyi Tamamla</h3>
+                        <h6>Kart ve Adres Bilgisi giriniz</h6>
+                    </div>
+                    <form asp-action="Payment" method="post">
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <input type="text" class="form-control form-control-lg" />
+                            <label class="form-label">Ad</label>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-7">
+                                <div data-mdb-input-init class="form-outline">
+                                    <input type="text" id="formControlLgXM" class="form-control form-control-lg"
+                                           value="1234 5678 1234 5678" />
+                                    <label class="form-label" for="formControlLgXM">Kredi Kartı Numarası</label>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div data-mdb-input-init class="form-outline">
+                                    <input type="password" id="formControlLgExpk" class="form-control form-control-lg"
+                                           placeholder="MM/YYYY" />
+                                    <label class="form-label" for="formControlLgExpk">Tarih</label>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div data-mdb-input-init class="form-outline">
+                                    <input type="password" id="formControlLgcvv" class="form-control form-control-lg"
+                                           placeholder="Cvv" />
+                                    <label class="form-label" for="formControlLgcvv">CVV</label>
+                                </div>
+                            </div>
+                        </div>
+                        @if (ViewBag.Addresses.Count == 0)
+                        {
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <input type="text" class="form-control form-control-lg" asp-for="AddressName" />
+                                <label class="form-label" asp-for="AddressName">Adres İsmi</label>
+                                <span asp-validation-for="AddressId" class="text-danger"></span>
+                            </div>
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <input type="text" class="form-control form-control-lg" asp-for="Address" />
+                                <label class="form-label" asp-for="Address">Adres</label>
+                                <span asp-validation-for="AddressId" class="text-danger"></span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label asp-for="AddressId" class="control-label"></label>
+                                <select asp-for="AddressId" class="form-control" asp-items="ViewBag.Addresses"></select>
+                                <span asp-validation-for="AddressId" class="text-danger"></span>
+                            </div>
+                        }
+                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-lg btn-block" type = "submit">Ödemeyi Tamamla</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

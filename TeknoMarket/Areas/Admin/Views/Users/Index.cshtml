@@ -5,10 +5,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Id</th>
+
             <th>Kullanıcı Adı</th>
             <th>Email</th>
-            <th>Doğum Tarihi</th>
+            <th>Adres</th>
 
         </tr>
     </thead>
@@ -16,10 +16,11 @@
         @foreach (var user in Model)
         {
             <tr>
-                <td>@user.Id</td>
+
                 <td>@user.Name</td>
                 <td>@user.Email</td>
-                <td>@(user.DateOfBirth.HasValue ? user.DateOfBirth.Value.ToShortDateString() : "-")</td>
+                <td>@user.UserAddress</td>
+
             </tr>
         }
     </tbody>

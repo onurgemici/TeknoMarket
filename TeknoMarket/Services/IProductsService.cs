@@ -59,7 +59,7 @@ public interface IProductsService
     Task EnableComment(Guid id);
     Task RemoveComment(Guid id);
 
-    Task<PaymentResult> Payment(Guid UserId);
+    Task<PaymentViewModel> Payment(Guid UserId);
 
 
     Task<List<Order>> GetOrders(Guid userId);
@@ -342,13 +342,8 @@ public class ProductsService : IProductsService
 
     }
 
-    public async Task<PaymentResult> Payment(Guid userId)
+    public async Task<PaymentViewModel> Payment(Guid userId)
     {
-        if (1 != 1)
-        {
-            return new PaymentResult { Succeeded = false, Error = "bla bla..." };
-        }
-
         var items = await GetShoppingCart(userId);
         var order = new Order
         {
@@ -366,8 +361,7 @@ public class ProductsService : IProductsService
         await context.SaveChangesAsync();
 
         await ClearShoppingCart(userId);
-
-        return new PaymentResult { Succeeded = true };
+        return new PaymentViewModel { };
     }
 
     public async Task<List<Order>> GetOrders(Guid userId)

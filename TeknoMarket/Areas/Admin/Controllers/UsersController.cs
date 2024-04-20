@@ -24,20 +24,16 @@ public class UsersController : Controller
     public async Task<IActionResult> Index()
     {
         var users = await _context.Users
-     .OfType<Customer>()
-     .Include(u => u.Addresses)
-     .Include(u => u.Comments)
-     .Include(u => u.Orders)
-     .Include(u => u.ShoppingCartItems)
-     .Include(u => u.Favorites)
-     .ToListAsync();
+            .OfType<Customer>()
+            .Include(u => u.Addresses) // User'ın Addresses ilişki alanını dahil ediyoruz
+            .ToListAsync();
 
         var usersViewModels = users.Select(u => new UsersViewModel
         {
             Id = u.Id,
             Name = u.Name,
             Email = u.Email,
-
+            UserAddress = u.Addresses.FirstOrDefault()?.Text // User'ın ilk adresinin Text alanını kullanıyoruz
         }).ToList();
 
         return View(usersViewModels);
